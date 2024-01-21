@@ -7,7 +7,7 @@ const Layout: React.FC<React.PropsWithChildren> = ({children}) => {
       <header className="bg-success-subtle ">
         <Navbar/>
       </header>
-      <main className="container">
+      <main className="container mt-2">
         {children}
       </main>
     </>
