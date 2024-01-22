@@ -11,5 +11,8 @@ export interface Dish {
   image: string;
 }
 
+export interface ApiGetDish {
+  [id: string]: ApiDish;
+}
 
 

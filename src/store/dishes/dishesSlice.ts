@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { createDish } from './dishesThunks';
+import { createDish, fetchDishes } from './dishesThunks';
 import { ApiDish, Dish } from '../../types';
 
 interface DishesState {
@@ -37,6 +37,19 @@ export const dishesSlice = createSlice({
     builder.addCase(createDish.rejected, (state) => {
       state.createDishLoading = false;
     });
+
+    builder.addCase(fetchDishes.pending, (state) => {
+      state.fetchDishLoading = true;
+    });
+    builder.addCase(fetchDishes.fulfilled, (state, { payload: dishes }) => {
+      state.fetchDishLoading = false;
+      state.dishes = dishes;
+    });
+    builder.addCase(fetchDishes.rejected, (state) => {
+      state.fetchDishLoading = false;
+    });
+
+
   },
 });
 
