@@ -1,17 +1,10 @@
-import { NavLink, useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectIsAdmin } from '../../store/admin/adminSlice';
 
 const Navbar = () => {
   const adminLink = ['Dishes', 'Orders'];
-  const [isAdmin, setIsAdmin] = useState(false);
-  const { pathname } = useLocation();
-
-
-  useEffect(() => {
-    if (pathname === '/admin/dishes' || pathname === '/admin/orders') {
-      setIsAdmin(true);
-    }
-  }, [pathname]);
+  const isAdmin = useSelector(selectIsAdmin);
 
   return (
     <nav className="navbar navbar-expand-lg text-dark">

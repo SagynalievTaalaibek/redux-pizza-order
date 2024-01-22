@@ -1,11 +1,11 @@
 import React from 'react';
 import Navbar from '../Navbar/Navbar';
 
-const Layout: React.FC<React.PropsWithChildren> = ({children}) => {
+const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
     <>
       <header className="bg-success-subtle ">
-        <Navbar/>
+        <Navbar />
       </header>
       <main className="container mt-2">
         {children}

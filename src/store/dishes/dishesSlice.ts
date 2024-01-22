@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { createDish, deleteDish, fetchDishes } from './dishesThunks';
+import { createDish, deleteDish, editDish, fetchDishes, fetchOneDish } from './dishesThunks';
 import { ApiDish, Dish } from '../../types';
 
 interface DishesState {
@@ -9,7 +9,7 @@ interface DishesState {
   fetchDishLoading: boolean;
   fetchOneDishLoading: boolean;
   createDishLoading: boolean;
-  updateDishLoading: boolean;
+  editDishLoading: boolean;
   deleteDishLoading: false | string;
 }
 
@@ -19,7 +19,7 @@ const initialState: DishesState = {
   fetchDishLoading: false,
   fetchOneDishLoading: false,
   createDishLoading: false,
-  updateDishLoading: false,
+  editDishLoading: false,
   deleteDishLoading: false,
 };
 
@@ -37,7 +37,6 @@ export const dishesSlice = createSlice({
     builder.addCase(createDish.rejected, (state) => {
       state.createDishLoading = false;
     });
-
     builder.addCase(fetchDishes.pending, (state) => {
       state.fetchDishLoading = true;
     });
@@ -48,8 +47,7 @@ export const dishesSlice = createSlice({
     builder.addCase(fetchDishes.rejected, (state) => {
       state.fetchDishLoading = false;
     });
-
-    builder.addCase(deleteDish.pending, (state, {meta}) => {
+    builder.addCase(deleteDish.pending, (state, { meta }) => {
       state.deleteDishLoading = meta.arg;
     });
     builder.addCase(deleteDish.fulfilled, (state) => {
@@ -58,7 +56,25 @@ export const dishesSlice = createSlice({
     builder.addCase(deleteDish.rejected, (state) => {
       state.deleteDishLoading = false;
     });
-
+    builder.addCase(editDish.pending, (state) => {
+      state.editDishLoading = true;
+    });
+    builder.addCase(editDish.fulfilled, (state) => {
+      state.editDishLoading = false;
+    });
+    builder.addCase(editDish.rejected, (state) => {
+      state.editDishLoading = false;
+    });
+    builder.addCase(fetchOneDish.pending, (state) => {
+      state.fetchOneDishLoading = true;
+    });
+    builder.addCase(fetchOneDish.fulfilled, (state, { payload: dish }) => {
+      state.fetchOneDishLoading = false;
+      state.oneDish = dish;
+    });
+    builder.addCase(fetchOneDish.rejected, (state) => {
+      state.fetchOneDishLoading = false;
+    });
   },
 });
 
@@ -71,4 +87,4 @@ export const selectFetchDishLoading = (state: RootState) => state.dishes.fetchDi
 export const selectDeleteDishLoading = (state: RootState) => state.dishes.deleteDishLoading;
 export const selectCreateDishLoading = (state: RootState) => state.dishes.createDishLoading;
 export const selectFetchOneDishLoading = (state: RootState) => state.dishes.fetchOneDishLoading;
-export const selectUpdateDishLoading = (state: RootState) => state.dishes.updateDishLoading;
+export const selectEditDishLoading = (state: RootState) => state.dishes.editDishLoading;

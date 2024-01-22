@@ -37,3 +37,25 @@ export const deleteDish = createAsyncThunk<void, string>(
     await axiosApi.delete(`/dishesPizza/${dishId}.json`);
   },
 );
+
+
+export const editDish = createAsyncThunk<void, {id: string, dish: ApiDish}>(
+  'dishes/edit',
+  async ({ id, dish }) => {
+    await axiosApi.put(`/dishesPizza/${id}.json`, dish);
+  },
+);
+
+export const fetchOneDish = createAsyncThunk<ApiDish, string>(
+  'dishes/fetchOne',
+  async (dishId) => {
+    const responseDish = await axiosApi.get<ApiDish | null>(`/dishesPizza/${dishId}.json`);
+    const dish = responseDish.data;
+
+    if (dish === null) {
+      throw new Error('Not found');
+    }
+
+    return dish;
+  },
+);
