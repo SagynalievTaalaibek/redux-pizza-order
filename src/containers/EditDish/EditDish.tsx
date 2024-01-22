@@ -1,10 +1,10 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import DishForm from '../../components/DIshForm/DishForm';
-import Spinner from '../../components/Spinner/Spinner';
 import { editDish, fetchOneDish } from '../../store/dishes/dishesThunks';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectEditDishLoading, selectFetchOneDishLoading, selectOneDish } from '../../store/dishes/dishesSlice';
+import DishForm from '../../components/DIshForm/DishForm';
+import Spinner from '../../components/Spinner/Spinner';
 import { ApiDish } from '../../types';
 
 const EditDish = () => {

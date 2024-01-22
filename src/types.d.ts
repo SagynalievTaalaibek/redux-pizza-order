@@ -15,24 +15,36 @@ export interface ApiGetDish {
   [id: string]: ApiDish;
 }
 
-export interface OrderDish {
-  dish: Dish;
-  amount: number;
-}
-
-export interface OrderInterface {
-  [id: string]: number
-}
-
 export interface Customer {
   name: string,
   address: string,
   phone: string,
 }
 
-export interface ApiOrder {
-  order: OrderInterface;
+export interface Order {
+  id: string,
+  order: { [id: string]: number; };
   customer: Customer;
+}
+
+export interface ApiOrder {
+  order: { [id: string]: number; };
+  customer: Customer;
+}
+
+export interface OrderDish {
+  dish: Dish;
+  amount: number;
+}
+
+export interface NewOrder {
+  id: string;
+  order: OrderDish[];
+  customer: Customer;
+}
+
+export interface ApiNewOrder {
+  [id: string]: ApiOrder;
 }
 
 

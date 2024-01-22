@@ -1,7 +1,6 @@
+import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectDishes } from '../../store/dishes/dishesSlice';
-import DishCard from '../../components/DishCard/DishCard';
-import React, { useEffect, useState } from 'react';
 import { fetchDishes } from '../../store/dishes/dishesThunks';
 import {
   clearOrder,
@@ -10,11 +9,12 @@ import {
   selectOrderDishes,
   toggleModal,
 } from '../../store/order/orderSlice';
+import { createOrder } from '../../store/order/orderThunks';
 import Modal from '../../components/Modal/Modal';
+import DishCard from '../../components/DishCard/DishCard';
+import ButtonSpinner from '../../components/Spinner/ButtonSpinner';
 import { DELIVERY } from '../../constants/constants';
 import { Customer } from '../../types';
-import ButtonSpinner from '../../components/Spinner/ButtonSpinner';
-import { createOrder } from '../../store/order/orderThunks';
 
 
 const Home = () => {

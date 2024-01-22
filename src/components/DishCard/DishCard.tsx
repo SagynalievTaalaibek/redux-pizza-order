@@ -1,5 +1,4 @@
 import React from 'react';
-import { Dish } from '../../types';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectDeleteDishLoading } from '../../store/dishes/dishesSlice';
@@ -7,6 +6,7 @@ import ButtonSpinner from '../Spinner/ButtonSpinner';
 import { deleteDish, fetchDishes } from '../../store/dishes/dishesThunks';
 import { selectIsAdmin } from '../../store/admin/adminSlice';
 import { addDish } from '../../store/order/orderSlice';
+import { Dish } from '../../types';
 
 interface Props {
   dish: Dish;

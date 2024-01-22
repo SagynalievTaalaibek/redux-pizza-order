@@ -1,16 +1,15 @@
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectDishes, selectFetchDishLoading } from '../../store/dishes/dishesSlice';
-import Spinner from '../../components/Spinner/Spinner';
-import { useEffect } from 'react';
 import { fetchDishes } from '../../store/dishes/dishesThunks';
+import Spinner from '../../components/Spinner/Spinner';
 import DishCard from '../../components/DishCard/DishCard';
 
 const Dishes = () => {
   const dispatch = useAppDispatch();
   const fetchDishesLoading = useAppSelector(selectFetchDishLoading);
   const dishes = useAppSelector(selectDishes);
-
 
   useEffect(() => {
     dispatch(fetchDishes());

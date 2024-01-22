@@ -1,17 +1,23 @@
-import { Dish, OrderDish } from '../../types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { createOrder } from './orderThunks';
+import { createOrder, deleteOrderData, fetchNewOrders } from './orderThunks';
+import { Dish, Order, OrderDish } from '../../types';
 
 interface OrderState {
   orderDishes: OrderDish[];
+  newOrders: Order[];
   createOrderLoading: boolean;
+  fetchOrderLoading: boolean;
+  deleteOrderLoading: boolean | string;
   modalShow: boolean;
 }
 
 const initialState: OrderState = {
   orderDishes: [],
+  newOrders: [],
   createOrderLoading: false,
+  fetchOrderLoading: false,
+  deleteOrderLoading: false,
   modalShow: false,
 };
 
@@ -67,11 +73,33 @@ const orderSlice = createSlice({
     builder.addCase(createOrder.rejected, state => {
       state.createOrderLoading = false;
     });
+    builder.addCase(fetchNewOrders.pending, state => {
+      state.fetchOrderLoading = true;
+    });
+    builder.addCase(fetchNewOrders.fulfilled, (state, {payload: newOrder}) => {
+      state.fetchOrderLoading = false;
+      state.newOrders = newOrder;
+    });
+    builder.addCase(fetchNewOrders.rejected, state => {
+      state.fetchOrderLoading = false;
+    });
+    builder.addCase(deleteOrderData.pending, state => {
+      state.deleteOrderLoading = true;
+    });
+    builder.addCase(deleteOrderData.fulfilled, (state, {meta}) => {
+      state.deleteOrderLoading = meta.arg;
+    });
+    builder.addCase(deleteOrderData.rejected, state => {
+      state.deleteOrderLoading = false;
+    });
   },
 });
 
 export const orderReducer = orderSlice.reducer;
 export const { addDish, updateOrder, clearOrder, toggleModal, deleteOrder } = orderSlice.actions;
 export const selectOrderDishes = (state: RootState) => state.order.orderDishes;
+export const selectNewOrders = (state: RootState) => state.order.newOrders;
 export const selectModalShow = (state: RootState) => state.order.modalShow;
 export const selectCreateOrderLoading = (state: RootState) => state.order.createOrderLoading;
+export const selectFetchOrderLoading = (state: RootState) => state.order.fetchOrderLoading;
+export const selectDeleteOrderLoading = (state: RootState) => state.order.deleteOrderLoading;
