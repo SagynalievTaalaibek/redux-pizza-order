@@ -6,6 +6,7 @@ import NewDish from './containers/NewDish/NewDish';
 import EditDish from './containers/EditDish/EditDish';
 import { useAppDispatch } from './app/hooks';
 import { setAdmin } from './store/admin/adminSlice';
+import Home from './containers/Home/Home';
 
 const App = () => {
   const { pathname } = useLocation();
@@ -21,7 +22,7 @@ const App = () => {
   return (
     <Layout>
       <Routes>
-        <Route path="/" element={'Home'} />
+        <Route path="/" element={<Home/>} />
         <Route path="/admin/dishes" element={<Dishes />} />
         <Route path="/admin/orders" element={'Orders'} />
         <Route path="/admin/new-dish" element={<NewDish />} />

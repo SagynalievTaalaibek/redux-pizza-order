@@ -1,6 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axiosApi from '../../axiosApi';
 import { ApiDish, ApiGetDish, Dish } from '../../types';
+import { AppDispatch } from '../../app/store';
+import { updateOrder } from '../order/orderSlice';
 
 export const createDish = createAsyncThunk<void, ApiDish>(
   'dishes/create',
@@ -9,9 +11,9 @@ export const createDish = createAsyncThunk<void, ApiDish>(
   },
 );
 
-export const fetchDishes = createAsyncThunk<Dish[], undefined>(
+export const fetchDishes = createAsyncThunk<Dish[], undefined, { dispatch: AppDispatch }>(
   'dishes/fetchAll',
-  async () => {
+  async (_, thunkAPI) => {
     const dishesResponse = await axiosApi.get<ApiGetDish | null>('dishesPizza.json');
     const dishes = dishesResponse.data;
 
@@ -27,6 +29,7 @@ export const fetchDishes = createAsyncThunk<Dish[], undefined>(
       });
     }
 
+    thunkAPI.dispatch(updateOrder(newDishes));
     return newDishes;
   },
 );

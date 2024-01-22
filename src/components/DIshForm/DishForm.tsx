@@ -18,7 +18,7 @@ interface Props {
 const DishForm: React.FC<Props> = ({ existingDish = initialState, onSubmit, isLoading }) => {
   const [dish, setDish] = useState<ApiDish>(existingDish);
 
-  const changeDish = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const changeDish = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDish((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
