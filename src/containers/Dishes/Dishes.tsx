@@ -16,7 +16,6 @@ const Dishes = () => {
     dispatch(fetchDishes());
   }, [dispatch]);
 
-  console.log(dishes);
   return (
     <>
       <div className="d-flex justify-content-between mb-2">
