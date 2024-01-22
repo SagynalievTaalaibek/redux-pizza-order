@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { ApiDish } from '../../types';
 import ButtonSpinner from '../Spinner/ButtonSpinner';
+import { ApiDish } from '../../types';
 
 const initialState: ApiDish = {
   title: '',
